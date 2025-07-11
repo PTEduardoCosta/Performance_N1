@@ -1,0 +1,67 @@
+Autor: Luís Eduardo Abreu 
+Versão do Documento: 2.0
+Data: 11 de Julho de 2025
+Lema: Deixar de ser um recetor passivo de dados e passar a ser o cientista ativo da minha própria saúde.
+
+1. Visão Geral do Projeto
+O objetivo deste projeto é criar um produto completo que recolha os dados necessários para eu poder conhecer melhor o meu corpo e, de forma natural, maximizar o retorno do meu esforço físico, mental e emocional. Para tal, é fundamental cruzar dados de Inputs (nutrição), Outputs (esforço físico, stress), Recuperação (qualidade do sono) e os horários em que estas atividades ocorrem, criando um centro de dados pessoal e acionável.
+
+2. Público-Alvo e Usabilidade
+Público-Alvo: N=1 (Eu). A ferramenta é desenhada para as minhas necessidades, frustrações e objetivos específicos.
+Experiência do Utilizador: A interação com o sistema deve ser agradável e não causar ansiedade.
+Modo "Coach" (Padrão): Apresentar diariamente apenas conselhos e insights sobre a rotina, de forma simples e direta.
+Modo "Consulta" (A Pedido): Quando eu quiser explorar os dados em detalhe, a aplicação deve fazer-me perguntas para guiar a minha análise e ajudar-me a encontrar correlações.
+
+3. Fases do Projeto
+Versão 1 (Terminal): O sistema correrá localmente no terminal, focando na recolha robusta de dados e na primeira versão dos scores de análise. (Esta fase está quase concluída).
+Versão 2 (Web App): A versão final será uma aplicação web interativa para uma experiência de utilização rica e visual.
+
+4. Arquitetura e Tech Stack
+Coletor de Dados (Backend):
+Linguagem: Python.
+Autenticação e API: Biblioteca garth para comunicação de baixo nível com o endpoint GraphQL da Garmin.
+Análise de Dados: Biblioteca Pandas para manipulação de dados, cálculos e preparação para visualização.
+Interface de Utilizador (UI):
+V1: Terminal.
+V2: Streamlit, por ser um framework rápido para criar dashboards interativos e gráficos a partir de dados em Python.
+Armazenamento de Dados:
+V1.1: Ficheiros CSV, com um novo ficheiro a ser criado por mês (ex: dados-2025-07.csv).
+V2.0+: Base de dados local SQLite (se o volume de dados o justificar).
+
+5. Roadmap e Funcionalidades
+v1.0 (CONCLUÍDO ✅):
+Autenticação robusta com garth.
+Cliente de API funcional em garmin_client.py.
+Capacidade de recolher dados de Sono, Passos e Stress via GraphQL.
+Módulo de análise analysis.py com "parsers" para limpar os dados.
+Interface no terminal com modo resumo e completo (--full).
+v1.1 (O Motor de Análise):
+[ ] Finalizar a Recolha: Usar o método de "espionagem" para encontrar as queries de VFC (HRV) e Body Battery.
+[ ] Implementar Fórmulas: Criar as funções calculate_recovery_score() e calculate_effort_score() em analysis.py.
+[ ] Criar Histórico: Guardar os scores e dados chave num ficheiro CSV mensal.
+v2.0 (O Dashboard Interativo):
+[ ] Fazer o esboço do dashboard.
+[ ] Desenvolver o dashboard com Streamlit, mostrando os scores e gráficos históricos.
+
+6. Visão Futura (V3.0 e Além)
+O objetivo a longo prazo é transcender a simples apresentação de dados e transformar a aplicação num verdadeiro parceiro de saúde, com foco na educação, motivação e personalização.
+Jornada do Utilizador Guiada e Progressiva (Modo "Ease-In"): A aplicação irá adaptar-se ao nível e aos objetivos de cada utilizador para criar uma experiência de onboarding que promova a adesão a longo prazo.
+1. Questionário de Foco: No início, o utilizador responde a perguntas simples para definir o seu objetivo principal (ex: "perder peso", "ter mais energia", "gerir o stress").
+2. Interface Adaptativa: Com base no objetivo, o dashboard principal será simplificado, mostrando apenas as 2 ou 3 métricas mais relevantes. As funcionalidades avançadas ficam ocultas para não sobrecarregar o utilizador com informação.
+3. Metas Evolutivas: O sistema define metas iniciais pequenas e alcançáveis (ex: 2500 passos/dia). Após um período de sucesso, celebra a conquista e sugere o próximo micro-objetivo, criando um ciclo de feedback positivo e momentum.
+4. Consulta Semanal Guiada: Durante o onboarding, a aplicação irá sugerir agendar uma "Consulta Semanal". Nesta sessão, o utilizador é guiado através de perguntas para analisar as tendências da semana. Se os objetivos foram cumpridos, o sistema pode aproveitar para introduzir e "desbloquear" uma nova métrica, explicando a sua importância.
+5. Gamificação: O "desbloqueio" de novas métricas e insights funciona como uma recompensa pela consistência, mantendo a motivação.
+Motor de Aconselhamento Contextual e Educativo: A plataforma não irá apenas reagir aos dados, mas antecipar as necessidades do utilizador, com o objetivo final de o educar sobre todas as métricas disponíveis e a sua importância.
+Educação Integrada: Para cada métrica, haverá uma explicação clara do seu significado e importância ("o porquê").
+Aconselhamento Preditivo: Com base nos objetivos e na análise de dados, o sistema oferecerá conselhos proativos para maximizar resultados e prevenir lesões.
+Exemplo Chave: Se um utilizador quer "perder peso" e aumenta o volume de corrida, a aplicação pode alertar: "Excelente progresso na sua atividade! Para proteger os seus joelhos de sobrecarga, é importante fortalecer os músculos de suporte, como as canelas (splint muscle). Clique aqui para ver 3 exercícios simples."
+Comunicação Positiva e Personalizável: A apresentação dos dados será desenhada para motivar, não para causar ansiedade.
+O foco da comunicação é sempre construtivo. Em vez de apresentar um "mau resultado" de forma negativa, a aplicação foca-se na solução.
+Gestão de Alertas: Se o sistema detetar um dado preocupante que possa estar a impedir a evolução (ex: VFC consistentemente baixa), irá apresentá-lo de forma calma, explicando as possíveis causas e sugerindo estratégias, sem causar alarme desnecessário. O utilizador poderá definir, no onboarding, o seu estilo de comunicação preferido.
+Inteligência Artificial (IA): As fórmulas manuais para os scores serão substituídas por modelos de Machine Learning que aprendem com os dados do utilizador para fazer previsões de recuperação e recomendações de treino ainda mais precisas e personalizadas.
+Integração de Novas Fontes de Dados: Adicionar o Oura Ring (temperatura) e o Lifesum (nutrição) para criar uma visão 360° da performance.
+Funcionalidades de Apoio ao Estilo de Vida:
+Lista de Compras Inteligente: Sugestão de compras baseada nos objetivos nutricionais.
+Alertas e Notificações: Envio de um resumo diário para o telemóvel.
+
+
